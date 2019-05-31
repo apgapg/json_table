@@ -1,4 +1,4 @@
-library table_widget;
+library json_table;
 
 import 'package:flutter/material.dart';
 
