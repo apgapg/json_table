@@ -95,7 +95,6 @@ class TableColumn extends StatelessWidget {
                     style: Theme.of(context).textTheme.display1.copyWith(fontWeight: FontWeight.w700, fontSize: 12.0),
                   ),
                 ),
-
           Container(
             child: Column(
               children: mapList
