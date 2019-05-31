@@ -94,8 +94,9 @@ JsonTable(
 ```
 
 ### Key Highlights
-- The table constructed isn't the flutter's native data table.
+- The table constructed isn't the flutter's native DataTable.
 - The table is manually coded hence serves a great learning purpose on how to create simple tables manually in flutter
+- Supports horizontal scroll
 
 ### Limitations
 - The Json array item's must contain the same keys set in every json object.
@@ -107,6 +108,7 @@ JsonTable(
 - [ ] Add support for auto formatting of date
 - [ ] Extracting column headers logic must be change. Not to depend on first object
 - [ ] Pagination support etc. Its good if this table can be replaced with Flutter's native DataTable
+- [ ] Add option to change header row to vertical row on left
 
 # ⭐ My Flutter Packages
 - [pie_chart](https://pub.dartlang.org/packages/pie_chart)  [![GitHub stars](https://img.shields.io/github/stars/apgapg/pie_chart.svg?style=social)](https://github.com/apgapg/pie_chart)  Flutter Pie Chart with cool animation.
