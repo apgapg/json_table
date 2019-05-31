@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:table_widget/json_table.dart';
+import 'package:json_table/json_table.dart';
 
 void main() => runApp(MyApp());
 

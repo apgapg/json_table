@@ -3,7 +3,7 @@
 
 This Flutter package provides a Json Table Widget for directly showing table from a json(Map).
 
-<img src="https://raw.githubusercontent.com/apgapg/json_table/master/src/s1.gif"  height = "400" alt="JsonTable">
+<img src="https://raw.githubusercontent.com/apgapg/json_table/master/src/s1.gif"  height = "400" alt="JsonTable"> <img src="https://raw.githubusercontent.com/apgapg/json_table/master/src/s2.gif"  height = "400" alt="JsonTable"> <img src="https://raw.githubusercontent.com/apgapg/json_table/master/src/s3.gif"  height = "400" alt="JsonTable">
 
 # 💻 Installation
 In the `dependencies:` section of your `pubspec.yaml`, add the following line:
@@ -96,7 +96,7 @@ JsonTable(
 ### Key Highlights
 - The table constructed isn't the flutter's native DataTable.
 - The table is manually coded hence serves a great learning purpose on how to create simple tables manually in flutter
-- Supports horizontal scroll
+- Supports vertical & horizontal scroll
 
 ### Limitations
 - The Json array item's must contain the same keys set in every json object.
