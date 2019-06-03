@@ -143,10 +143,6 @@ Head over to example code: [custom_column_table.dart](https://github.com/apgapg/
 - Supports vertical & horizontal scroll
 - Supports custom columns includes default value, column name, value builder
 
-### Limitations
-- (Only for Simple Table) The Json array item's must contain the same keys set in every json object.
-- Currently the column header keys are extracted from first json item of json array. Hence no required keys that are to be shown must be missing in first json object
-
 ## TODO
 - [X] Custom header list parameter. This will help to show only those keys as mentioned in header list
 - [X] Add support for keys missing in json object
