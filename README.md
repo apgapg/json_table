@@ -141,9 +141,10 @@ Head over to example code: [custom_column_table.dart](https://github.com/apgapg/
 - The table constructed isn't the flutter's native DataTable.
 - The table is manually coded hence serves a great learning purpose on how to create simple tables manually in flutter
 - Supports vertical & horizontal scroll
+- Supports custom columns includes default value, column name, value builder
 
 ### Limitations
-- The Json array item's must contain the same keys set in every json object.
+- (Only for Simple Table) The Json array item's must contain the same keys set in every json object.
 - Currently the column header keys are extracted from first json item of json array. Hence no required keys that are to be shown must be missing in first json object
 
 ## TODO
