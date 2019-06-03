@@ -147,9 +147,9 @@ Head over to example code: [custom_column_table.dart](https://github.com/apgapg/
 - Currently the column header keys are extracted from first json item of json array. Hence no required keys that are to be shown must be missing in first json object
 
 ## TODO
-- [ ] Custom header list parameter. This will help to show only those keys as mentioned in header list
-- [ ] Add support for keys missing in json object
-- [ ] Add support for auto formatting of date
+- [X] Custom header list parameter. This will help to show only those keys as mentioned in header list
+- [X] Add support for keys missing in json object
+- [X] Add support for auto formatting of date
 - [ ] Extracting column headers logic must be change. Not to depend on first object
 - [ ] Pagination support etc. Its good if this table can be replaced with Flutter's native DataTable
 - [ ] Add option to change header row to vertical row on left
