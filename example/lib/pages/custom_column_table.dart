@@ -26,8 +26,7 @@ class _CustomColumnTableState extends State<CustomColumnTable> {
       JsonTableColumn("age", label: "Age"),
       JsonTableColumn("DOB", label: "Date of Birth", valueBuilder: formatDOB),
       JsonTableColumn("age", label: "Eligible to Vote", valueBuilder: eligibleToVote),
-      JsonTableColumn("email", label: "E-mail",defaultValue: "NA"),
-
+      JsonTableColumn("email", label: "E-mail", defaultValue: "NA"),
     ];
   }
 
@@ -37,24 +36,22 @@ class _CustomColumnTableState extends State<CustomColumnTable> {
     return Scaffold(
       body: Container(
         padding: EdgeInsets.all(16.0),
-        child: toggle
-            ? JsonTable(
-                json,
-                columns: columns,
-              )
-            : Center(
-                child: Text(getPrettyJSONString(jsonSample)),
-              ),
+        child: Column(
+          children: <Widget>[
+            JsonTable(
+              json,
+              columns: columns,
+            ),
+            SizedBox(
+              height: 16.0,
+            ),
+            Text(
+              getPrettyJSONString(jsonSample),
+              style: TextStyle(fontSize: 13.0),
+            ),
+          ],
+        ),
       ),
-      floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.grid_on),
-          onPressed: () {
-            setState(
-              () {
-                toggle = !toggle;
-              },
-            );
-          }),
     );
   }
 
@@ -70,7 +67,7 @@ class _CustomColumnTableState extends State<CustomColumnTable> {
   }
 
   String eligibleToVote(value) {
-    if (value>=18) {
+    if (value >= 18) {
       return "Yes";
     } else
       return "No";

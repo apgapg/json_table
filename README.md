@@ -3,7 +3,7 @@
 
 This Flutter package provides a Json Table Widget for directly showing table from a json(Map).
 
-<img src="https://raw.githubusercontent.com/apgapg/json_table/master/src/s1.gif"  height = "400" alt="JsonTable"> <img src="https://raw.githubusercontent.com/apgapg/json_table/master/src/s2.gif"  height = "400" alt="JsonTable"> <img src="https://raw.githubusercontent.com/apgapg/json_table/master/src/s3.gif"  height = "400" alt="JsonTable">
+<img src="https://raw.githubusercontent.com/apgapg/json_table/master/src/s1.gif"  height = "400" alt="JsonTable"> <img src="https://raw.githubusercontent.com/apgapg/json_table/master/src/s2.gif"  height = "400" alt="JsonTable"> <img src="https://raw.githubusercontent.com/apgapg/json_table/master/src/s3.gif"  height = "400" alt="JsonTable"> <img src="https://raw.githubusercontent.com/apgapg/json_table/master/src/ss1.png"  height = "400" alt="JsonTable">
 
 # 💻 Installation
 In the `dependencies:` section of your `pubspec.yaml`, add the following line:
@@ -54,7 +54,7 @@ tableCellBuilder: (value) {
   }
 ```
 
-### Simple Implementation
+### - Vanilla Implementation
 ```dart
 //Decode your json string
 final String jsonSample='[{"id":1},{"id":2}]';
@@ -64,7 +64,7 @@ var json = jsonDecode(jsonSample);
 child: JsonTable(json)
 ```
 
-### Full Implementation
+### - Implementation with HEADER and CELL widget builders
 ```dart
 JsonTable(
    json,
@@ -92,6 +92,50 @@ JsonTable(
    },
  )
 ```
+
+Head over to example code: [simple_table.dart](https://github.com/apgapg/json_table/blob/master/example/lib/pages/simple_table.dart)
+
+### - Implementation with custom COLUMNS list   
+
+- Pass custom column list to control what columns are displayed in table
+- The list item must be constructed using JsonTableColumn class
+- JsonTableColumn provides 4 parameters, namely,
+```dart
+JsonTableColumn("age", label: "Eligible to Vote", valueBuilder: eligibleToVote, defaultValue:"NA")
+```
+- First parameter is the field/key to pick from the data
+- label: The column header label to be displayed
+- defaultValue: To be used when data or key is null
+- valueBuilder: To get the formatted value like date etc
+
+<img src="https://raw.githubusercontent.com/apgapg/json_table/master/src/ss1.png"  height = "600" alt="JsonTable"> 
+      
+```dart
+//Decode your json string
+final String jsonSample='[{"id":1},{"id":2}]';
+var json = jsonDecode(jsonSample);
+//Create your column list
+var columns = [
+      JsonTableColumn("name", label: "Name"),
+      JsonTableColumn("age", label: "Age"),
+      JsonTableColumn("DOB", label: "Date of Birth", valueBuilder: formatDOB),
+      JsonTableColumn("age", label: "Eligible to Vote", valueBuilder: eligibleToVote),
+      JsonTableColumn("email", label: "E-mail", defaultValue: "NA"),
+    ];
+//Simply pass this column list to JsonTable
+child: JsonTable(json,columns: columns)
+
+//Example of valueBuilder
+String eligibleToVote(value) {
+    if (value >= 18) {
+      return "Yes";
+    } else
+      return "No";
+}
+```
+
+Head over to example code: [custom_column_table.dart](https://github.com/apgapg/json_table/blob/master/example/lib/pages/custom_column_table.dart)
+
 
 ### Key Highlights
 - The table constructed isn't the flutter's native DataTable.
