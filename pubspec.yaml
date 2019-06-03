@@ -1,6 +1,6 @@
 name: json_table
 description: A Flutter package providing Json Table Widget for directly showing table from a json(Map).
-version: 0.1.0
+version: 0.2.0
 author: Ayush P Gupta <ayushpguptaapg@gmail.com>
 homepage: https://github.com/apgapg/json_table
 
