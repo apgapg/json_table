@@ -19,7 +19,7 @@ class JsonTable extends StatefulWidget {
 }
 
 class _JsonTableState extends State<JsonTable> {
-  List<String> headerList = new List();
+  Set<String> headerList = new Set();
 
   @override
   void initState() {
@@ -69,18 +69,18 @@ class _JsonTableState extends State<JsonTable> {
     );
   }
 
-  List<String> extractColumnHeaders(Map<String, dynamic> map) {
-    assert(map != null);
-    var list = new List<String>();
-    var keyList = map.keys;
-    keyList.forEach((key) {
-      list.add(key);
+  Set<String> extractColumnHeaders() {
+    var headers=Set<String>();
+    widget.dataList.forEach((map){
+      (map as Map).keys.forEach((key){
+        headers.add(key);
+      });
     });
-    return list;
+    return headers;
   }
 
   void setHeaderList() {
-    var headerList = extractColumnHeaders(widget.dataList.elementAt(0));
+    var headerList = extractColumnHeaders();
     assert(headerList != null);
     this.headerList = headerList;
   }
