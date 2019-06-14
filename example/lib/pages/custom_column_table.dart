@@ -41,6 +41,7 @@ class _CustomColumnTableState extends State<CustomColumnTable> {
             JsonTable(
               json,
               columns: columns,
+              showColumnToggle:true
             ),
             SizedBox(
               height: 16.0,

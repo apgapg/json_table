@@ -11,8 +11,16 @@ class JsonTable extends StatefulWidget {
   final TableHeaderBuilder tableHeaderBuilder;
   final TableCellBuilder tableCellBuilder;
   final List<JsonTableColumn> columns;
+  final bool showColumnToggle;
 
-  JsonTable(this.dataList, {Key key, this.tableHeaderBuilder, this.tableCellBuilder, this.columns}) : super(key: key);
+  JsonTable(
+    this.dataList, {
+    Key key,
+    this.tableHeaderBuilder,
+    this.tableCellBuilder,
+    this.columns,
+    this.showColumnToggle = false,
+  }) : super(key: key);
 
   @override
   _JsonTableState createState() => _JsonTableState();
@@ -20,6 +28,7 @@ class JsonTable extends StatefulWidget {
 
 class _JsonTableState extends State<JsonTable> {
   Set<String> headerList = new Set();
+  Set<String> filterHeaderList = new Set();
 
   @override
   void initState() {
@@ -46,21 +55,71 @@ class _JsonTableState extends State<JsonTable> {
         scrollDirection: Axis.horizontal,
         child: Column(
           mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
+            Container(
+              width: MediaQuery.of(context).size.width,
+              child: Wrap(
+                runSpacing: -12,
+                direction: Axis.horizontal,
+                children: <Widget>[
+                  for (String header in headerList)
+                    Material(
+                      color: Colors.transparent,
+                      child: InkWell(
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            Checkbox(
+                              value: this.filterHeaderList.contains(header),
+                              onChanged: null,
+                            ),
+                            Text(header),
+                            SizedBox(
+                              width: 4.0,
+                            ),
+                          ],
+                        ),
+                        onTap: () {
+                          setState(() {
+                            if (this.filterHeaderList.contains(header))
+                              this.filterHeaderList.remove(header);
+                            else
+                              this.filterHeaderList.add(header);
+                          });
+                        },
+                      ),
+                    )
+                ],
+              ),
+            ),
             if (widget.columns != null)
               Row(
                 children: widget.columns
                     .map(
-                      (item) => TableColumn(item.label, widget.dataList, widget.tableHeaderBuilder, widget.tableCellBuilder, item),
+                      (item) => TableColumn(
+                            item.label,
+                            widget.dataList,
+                            widget.tableHeaderBuilder,
+                            widget.tableCellBuilder,
+                            item,
+                          ),
                     )
                     .toList(),
               )
             else
               Row(
                 children: headerList
+                    .where((header) => filterHeaderList.contains(header))
                     .map(
-                      (header) => TableColumn(header, widget.dataList, widget.tableHeaderBuilder, widget.tableCellBuilder, null),
-                )
+                      (header) => TableColumn(
+                            header,
+                            widget.dataList,
+                            widget.tableHeaderBuilder,
+                            widget.tableCellBuilder,
+                            null,
+                          ),
+                    )
                     .toList(),
               )
           ],
@@ -70,9 +129,9 @@ class _JsonTableState extends State<JsonTable> {
   }
 
   Set<String> extractColumnHeaders() {
-    var headers=Set<String>();
-    widget.dataList.forEach((map){
-      (map as Map).keys.forEach((key){
+    var headers = Set<String>();
+    widget.dataList.forEach((map) {
+      (map as Map).keys.forEach((key) {
         headers.add(key);
       });
     });
@@ -83,6 +142,7 @@ class _JsonTableState extends State<JsonTable> {
     var headerList = extractColumnHeaders();
     assert(headerList != null);
     this.headerList = headerList;
+    this.filterHeaderList.addAll(headerList);
   }
 }
 
@@ -93,7 +153,13 @@ class TableColumn extends StatelessWidget {
   final TableCellBuilder tableCellBuilder;
   final JsonTableColumn column;
 
-  TableColumn(this.header, this.dataList, this.tableHeaderBuilder, this.tableCellBuilder, this.column);
+  TableColumn(
+    this.header,
+    this.dataList,
+    this.tableHeaderBuilder,
+    this.tableCellBuilder,
+    this.column,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -105,11 +171,18 @@ class TableColumn extends StatelessWidget {
               ? tableHeaderBuilder(header)
               : Container(
                   padding: EdgeInsets.symmetric(horizontal: 4.0, vertical: 2.0),
-                  decoration: BoxDecoration(border: Border.all(width: 0.5), color: Colors.grey[300]),
+                  decoration: BoxDecoration(
+                    border: Border.all(width: 0.5),
+                    color: Colors.grey[300],
+                  ),
                   child: Text(
                     header,
                     textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.display1.copyWith(fontWeight: FontWeight.w700, fontSize: 14.0, color: Colors.black87),
+                    style: Theme.of(context).textTheme.display1.copyWith(
+                          fontWeight: FontWeight.w700,
+                          fontSize: 14.0,
+                          color: Colors.black87,
+                        ),
                   ),
                 ),
           Container(
@@ -119,14 +192,21 @@ class TableColumn extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: <Widget>[
                           tableCellBuilder != null
-                              ? tableCellBuilder(getFormattedValue(rowMap[column?.field??header]))
+                              ? tableCellBuilder(getFormattedValue(rowMap[column?.field ?? header]))
                               : Container(
                                   padding: EdgeInsets.symmetric(horizontal: 4.0, vertical: 2.0),
-                                  decoration: BoxDecoration(border: Border.all(width: 0.5, color: Colors.grey.withOpacity(0.5))),
+                                  decoration: BoxDecoration(
+                                      border: Border.all(
+                                    width: 0.5,
+                                    color: Colors.grey.withOpacity(0.5),
+                                  )),
                                   child: Text(
-                                    getFormattedValue(rowMap[column?.field??header]),
+                                    getFormattedValue(rowMap[column?.field ?? header]),
                                     textAlign: TextAlign.center,
-                                    style: Theme.of(context).textTheme.display1.copyWith(fontSize: 14.0, color: Colors.grey[900]),
+                                    style: Theme.of(context).textTheme.display1.copyWith(
+                                          fontSize: 14.0,
+                                          color: Colors.grey[900],
+                                        ),
                                   ),
                                 ),
                         ],
@@ -140,9 +220,8 @@ class TableColumn extends StatelessWidget {
   }
 
   String getFormattedValue(dynamic value) {
-    if(value==null)
-      return column?.defaultValue??'';
-    if(column?.valueBuilder!=null){
+    if (value == null) return column?.defaultValue ?? '';
+    if (column?.valueBuilder != null) {
       return column.valueBuilder(value);
     }
     return value.toString();
