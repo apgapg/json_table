@@ -1,3 +1,6 @@
+## [0.4.0] - Support Column toggle also.
+- A bool as a parameter is provided to toggle column visibility
+
 ## [0.3.0] - Change keys extraction code  
 - Keys extraction is no more depended on first object of array. All possible keys in source data is taken into account
 
