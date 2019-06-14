@@ -32,6 +32,7 @@ class _SimpleTableState extends State<SimpleTable> {
                 children: [
                   JsonTable(
                     json,
+                    showColumnToggle: true,
                     tableHeaderBuilder: (String header) {
                       return Container(
                         padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
