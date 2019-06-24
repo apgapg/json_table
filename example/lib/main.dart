@@ -20,7 +20,6 @@ class MyApp extends StatelessWidget {
 }
 
 class RootPage extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(

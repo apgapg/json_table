@@ -6,7 +6,8 @@ class JsonTableColumn {
   final String defaultValue;
   final ValueBuilder valueBuilder;
 
-  JsonTableColumn(this.field, {this.label, this.defaultValue = '', this.valueBuilder}) {
+  JsonTableColumn(this.field,
+      {this.label, this.defaultValue = '', this.valueBuilder}) {
     this.label = label ?? field;
   }
 }

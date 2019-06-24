@@ -193,18 +193,24 @@ class TableColumn extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: <Widget>[
                           tableCellBuilder != null
-                              ? tableCellBuilder(getFormattedValue(rowMap[column?.field ?? header]))
+                              ? tableCellBuilder(getFormattedValue(
+                                  rowMap[column?.field ?? header]))
                               : Container(
-                                  padding: EdgeInsets.symmetric(horizontal: 4.0, vertical: 2.0),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 4.0, vertical: 2.0),
                                   decoration: BoxDecoration(
                                       border: Border.all(
                                     width: 0.5,
                                     color: Colors.grey.withOpacity(0.5),
                                   )),
                                   child: Text(
-                                    getFormattedValue(rowMap[column?.field ?? header]),
+                                    getFormattedValue(
+                                        rowMap[column?.field ?? header]),
                                     textAlign: TextAlign.center,
-                                    style: Theme.of(context).textTheme.display1.copyWith(
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .display1
+                                        .copyWith(
                                           fontSize: 14.0,
                                           color: Colors.grey[900],
                                         ),

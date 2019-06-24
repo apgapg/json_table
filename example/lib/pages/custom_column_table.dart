@@ -11,7 +11,8 @@ class CustomColumnTable extends StatefulWidget {
 }
 
 class _CustomColumnTableState extends State<CustomColumnTable> {
-  final String jsonSample = '[{"name":"Ram","email":"ram@gmail.com","age":23,"DOB":"1990-12-01"},'
+  final String jsonSample =
+      '[{"name":"Ram","email":"ram@gmail.com","age":23,"DOB":"1990-12-01"},'
       '{"name":"Shyam","email":"shyam23@gmail.com","age":18,"DOB":"1995-07-01"},'
       '{"name":"John","email":"john@gmail.com","age":10,"DOB":"2000-02-24"},'
       '{"name":"Ram","age":12,"DOB":"2000-02-01"}]';
@@ -25,7 +26,8 @@ class _CustomColumnTableState extends State<CustomColumnTable> {
       JsonTableColumn("name", label: "Name"),
       JsonTableColumn("age", label: "Age"),
       JsonTableColumn("DOB", label: "Date of Birth", valueBuilder: formatDOB),
-      JsonTableColumn("age", label: "Eligible to Vote", valueBuilder: eligibleToVote),
+      JsonTableColumn("age",
+          label: "Eligible to Vote", valueBuilder: eligibleToVote),
       JsonTableColumn("email", label: "E-mail", defaultValue: "NA"),
     ];
   }
@@ -38,11 +40,7 @@ class _CustomColumnTableState extends State<CustomColumnTable> {
         padding: EdgeInsets.all(16.0),
         child: Column(
           children: <Widget>[
-            JsonTable(
-              json,
-              columns: columns,
-              showColumnToggle:true
-            ),
+            JsonTable(json, columns: columns, showColumnToggle: true),
             SizedBox(
               height: 16.0,
             ),
