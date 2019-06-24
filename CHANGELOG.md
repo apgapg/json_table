@@ -1,3 +1,6 @@
+## [0.4.1]
+- Reformat code with flutter format
+
 ## [0.4.0] - Support Column toggle also.
 - A bool as a parameter is provided to toggle column visibility
 
