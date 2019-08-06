@@ -1,3 +1,7 @@
+## [1.0.0]
+- Remove column toggle when column list is provided
+- Fix text colors for dark theme
+
 ## [0.4.1]
 - Reformat code with flutter format
 
