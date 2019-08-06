@@ -64,33 +64,34 @@ class _JsonTableState extends State<JsonTable> {
                   runSpacing: -12,
                   direction: Axis.horizontal,
                   children: <Widget>[
-                    for (String header in headerList)
-                      Material(
-                        color: Colors.transparent,
-                        child: InkWell(
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: <Widget>[
-                              Checkbox(
-                                value: this.filterHeaderList.contains(header),
-                                onChanged: null,
-                              ),
-                              Text(header),
-                              SizedBox(
-                                width: 4.0,
-                              ),
-                            ],
+                    if (widget.columns == null)
+                      for (String header in headerList)
+                        Material(
+                          color: Colors.transparent,
+                          child: InkWell(
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                Checkbox(
+                                  value: this.filterHeaderList.contains(header),
+                                  onChanged: null,
+                                ),
+                                Text(header),
+                                SizedBox(
+                                  width: 4.0,
+                                ),
+                              ],
+                            ),
+                            onTap: () {
+                              setState(() {
+                                if (this.filterHeaderList.contains(header))
+                                  this.filterHeaderList.remove(header);
+                                else
+                                  this.filterHeaderList.add(header);
+                              });
+                            },
                           ),
-                          onTap: () {
-                            setState(() {
-                              if (this.filterHeaderList.contains(header))
-                                this.filterHeaderList.remove(header);
-                              else
-                                this.filterHeaderList.add(header);
-                            });
-                          },
                         ),
-                      )
                   ],
                 ),
               ),
@@ -99,12 +100,12 @@ class _JsonTableState extends State<JsonTable> {
                 children: widget.columns
                     .map(
                       (item) => TableColumn(
-                            item.label,
-                            widget.dataList,
-                            widget.tableHeaderBuilder,
-                            widget.tableCellBuilder,
-                            item,
-                          ),
+                        item.label,
+                        widget.dataList,
+                        widget.tableHeaderBuilder,
+                        widget.tableCellBuilder,
+                        item,
+                      ),
                     )
                     .toList(),
               )
@@ -114,12 +115,12 @@ class _JsonTableState extends State<JsonTable> {
                     .where((header) => filterHeaderList.contains(header))
                     .map(
                       (header) => TableColumn(
-                            header,
-                            widget.dataList,
-                            widget.tableHeaderBuilder,
-                            widget.tableCellBuilder,
-                            null,
-                          ),
+                        header,
+                        widget.dataList,
+                        widget.tableHeaderBuilder,
+                        widget.tableCellBuilder,
+                        null,
+                      ),
                     )
                     .toList(),
               )
@@ -179,11 +180,10 @@ class TableColumn extends StatelessWidget {
                   child: Text(
                     header,
                     textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.display1.copyWith(
-                          fontWeight: FontWeight.w700,
-                          fontSize: 14.0,
-                          color: Colors.black87,
-                        ),
+                    style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 14.0,
+                    ),
                   ),
                 ),
           Container(
@@ -207,13 +207,9 @@ class TableColumn extends StatelessWidget {
                                     getFormattedValue(
                                         rowMap[column?.field ?? header]),
                                     textAlign: TextAlign.center,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .display1
-                                        .copyWith(
-                                          fontSize: 14.0,
-                                          color: Colors.grey[900],
-                                        ),
+                                    style: TextStyle(
+                                      fontSize: 14.0,
+                                    ),
                                   ),
                                 ),
                         ],
