@@ -1,3 +1,7 @@
+## [1.0.1]
+- Add json decode support for json column
+- Fix header text color to black irrespective of theme
+
 ## [1.0.0]
 - Remove column toggle when column list is provided
 - Fix text colors for dark theme
