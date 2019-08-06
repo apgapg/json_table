@@ -183,6 +183,7 @@ class TableColumn extends StatelessWidget {
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 14.0,
+                      color: Colors.black87,
                     ),
                   ),
                 ),
