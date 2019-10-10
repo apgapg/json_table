@@ -2,6 +2,8 @@ import 'package:example/pages/custom_column_table.dart';
 import 'package:example/pages/simple_table.dart';
 import 'package:flutter/material.dart';
 
+import 'pages/custom_column_nested_table.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -23,7 +25,7 @@ class RootPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 2,
+      length: 3,
       child: Scaffold(
         appBar: AppBar(
           title: Text("Table Widget"),
@@ -33,7 +35,10 @@ class RootPage extends StatelessWidget {
                 text: "Simple Table",
               ),
               Tab(
-                text: "Custom Column Table",
+                text: "Custom Table",
+              ),
+              Tab(
+                text: "Nested Data Table",
               ),
             ],
           ),
@@ -42,6 +47,7 @@ class RootPage extends StatelessWidget {
           children: <Widget>[
             SimpleTable(),
             CustomColumnTable(),
+            CustomColumnNestedTable(),
           ],
         ),
       ),

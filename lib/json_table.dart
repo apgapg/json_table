@@ -2,6 +2,7 @@ library json_table;
 
 import 'package:flutter/material.dart';
 import 'package:json_table/json_table_column.dart';
+import 'package:json_utilities/json_utilities.dart';
 
 typedef TableHeaderBuilder = Widget Function(String header);
 typedef TableCellBuilder = Widget Function(dynamic value);
@@ -154,6 +155,7 @@ class TableColumn extends StatelessWidget {
   final TableHeaderBuilder tableHeaderBuilder;
   final TableCellBuilder tableCellBuilder;
   final JsonTableColumn column;
+  final jsonUtils = JSONUtils();
 
   TableColumn(
     this.header,
@@ -194,8 +196,15 @@ class TableColumn extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: <Widget>[
                           tableCellBuilder != null
-                              ? tableCellBuilder(getFormattedValue(
-                                  rowMap[column?.field ?? header]))
+                              ? tableCellBuilder(
+                                  getFormattedValue(
+                                    jsonUtils.get(
+                                      rowMap,
+                                      column?.field ?? header,
+                                      column?.defaultValue ?? '',
+                                    ),
+                                  ),
+                                )
                               : Container(
                                   padding: EdgeInsets.symmetric(
                                       horizontal: 4.0, vertical: 2.0),
@@ -206,7 +215,12 @@ class TableColumn extends StatelessWidget {
                                   )),
                                   child: Text(
                                     getFormattedValue(
-                                        rowMap[column?.field ?? header]),
+                                      jsonUtils.get(
+                                        rowMap,
+                                        column?.field ?? header,
+                                        column?.defaultValue ?? '',
+                                      ),
+                                    ),
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                       fontSize: 14.0,
