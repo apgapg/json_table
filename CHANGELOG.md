@@ -1,3 +1,6 @@
+## [1.1.0]
+- Add nested data showing support
+
 ## [1.0.1]
 - Add json decode support for json column
 - Fix header text color to black irrespective of theme
