@@ -57,7 +57,7 @@ tableCellBuilder: (value) {
 ```dart
  showColumnToggle: true
 ```
-<img src="https://raw.githubusercontent.com/apgapg/json_table/master/src/ss2.png"  height = "600" alt="JsonTable"> 
+<img src="https://raw.githubusercontent.com/apgapg/json_table/master/src/ss2.png"  height = "400" alt="JsonTable"> 
 
 ### - Vanilla Implementation
 ```dart
@@ -113,11 +113,14 @@ JsonTableColumn("age", label: "Eligible to Vote", valueBuilder: eligibleToVote, 
 - defaultValue: To be used when data or key is null
 - valueBuilder: To get the formatted value like date etc
 
-<img src="https://raw.githubusercontent.com/apgapg/json_table/master/src/ss1.png"  height = "600" alt="JsonTable"> 
+<img src="https://raw.githubusercontent.com/apgapg/json_table/master/src/ss1.png"  height = "400" alt="JsonTable"> 
       
 ```dart
 //Decode your json string
-final String jsonSample='[{"id":1},{"id":2}]';
+final String jsonSample='[{"name":"Ram","email":"ram@gmail.com","age":23,"DOB":"1990-12-01"},'
+                              '{"name":"Shyam","email":"shyam23@gmail.com","age":18,"DOB":"1995-07-01"},'
+                              '{"name":"John","email":"john@gmail.com","age":10,"DOB":"2000-02-24"},'
+                              '{"name":"Ram","age":12,"DOB":"2000-02-01"}]';
 var json = jsonDecode(jsonSample);
 //Create your column list
 var columns = [
@@ -141,18 +144,53 @@ String eligibleToVote(value) {
 
 Head over to example code: [custom_column_table.dart](https://github.com/apgapg/json_table/blob/master/example/lib/pages/custom_column_table.dart)
 
+### - Implementation with nested data list   
+
+Suppose your json object has nested data like email as shown below:
+```dart
+{"name":"Ram","email":{"1":"ram@gmail.com"},"age":23,"DOB":"1990-12-01"}
+```
+- Just use email.1 instead of email as key
+```dart
+JsonTableColumn("email.1", label: "Email", defaultValue:"NA")
+```
+
+<img src="https://raw.githubusercontent.com/apgapg/json_table/master/src/ss3.png"  height = "400" alt="JsonTable"> 
+      
+```dart
+//Decode your json string
+final String jsonSample='[{"name":"Ram","email":{"1":"ram@gmail.com"},"age":23,"DOB":"1990-12-01"},'
+                               '{"name":"Shyam","email":{"1":"shyam23@gmail.com"},"age":18,"DOB":"1995-07-01"},'
+                               '{"name":"John","email":{"1":"john@gmail.com"},"age":10,"DOB":"2000-02-24"}]';
+var json = jsonDecode(jsonSample);
+//Create your column list
+var columns = [
+      JsonTableColumn("name", label: "Name"),
+      JsonTableColumn("age", label: "Age"),
+      JsonTableColumn("DOB", label: "Date of Birth", valueBuilder: formatDOB),
+      JsonTableColumn("age", label: "Eligible to Vote", valueBuilder: eligibleToVote),
+      JsonTableColumn("email.1", label: "E-mail", defaultValue: "NA"),
+    ];
+//Simply pass this column list to JsonTable
+child: JsonTable(json,columns: columns)
+```
+
+Head over to example code: [custom_column_nested_table.dart](https://github.com/apgapg/json_table/blob/master/example/lib/pages/custom_column_nested_table.dart)
 
 ### Key Highlights
 - The table constructed isn't the flutter's native DataTable.
 - The table is manually coded hence serves a great learning purpose on how to create simple tables manually in flutter
 - Supports vertical & horizontal scroll
 - Supports custom columns includes default value, column name, value builder
+- Supports nested data showing
 
 ## TODO
 - [X] Custom header list parameter. This will help to show only those keys as mentioned in header list
 - [X] Add support for keys missing in json object
 - [X] Add support for auto formatting of date
 - [X] Extracting column headers logic must be change. Not to depend on first object
+- [X] Nested data showing support
+
 - [ ] Pagination support etc. Its good if this table can be replaced with Flutter's native DataTable
 - [ ] Add option to change header row to vertical row on left
 
