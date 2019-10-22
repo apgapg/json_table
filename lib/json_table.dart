@@ -13,6 +13,8 @@ class JsonTable extends StatefulWidget {
   final TableCellBuilder tableCellBuilder;
   final List<JsonTableColumn> columns;
   final bool showColumnToggle;
+  final bool allowRowHighlight;
+  final Color rowHighlightColor;
 
   JsonTable(
     this.dataList, {
@@ -21,6 +23,8 @@ class JsonTable extends StatefulWidget {
     this.tableCellBuilder,
     this.columns,
     this.showColumnToggle = false,
+    this.allowRowHighlight = false,
+    this.rowHighlightColor,
   }) : super(key: key);
 
   @override
@@ -30,6 +34,7 @@ class JsonTable extends StatefulWidget {
 class _JsonTableState extends State<JsonTable> {
   Set<String> headerList = new Set();
   Set<String> filterHeaderList = new Set();
+  int highlightedRowIndex;
 
   @override
   void initState() {
@@ -114,12 +119,15 @@ class _JsonTableState extends State<JsonTable> {
                 children: widget.columns
                     .map(
                       (item) => TableColumn(
-                        item.label,
-                        widget.dataList,
-                        widget.tableHeaderBuilder,
-                        widget.tableCellBuilder,
-                        item,
-                      ),
+                          item.label,
+                          widget.dataList,
+                          widget.tableHeaderBuilder,
+                          widget.tableCellBuilder,
+                          item,
+                          onRowTap,
+                          highlightedRowIndex,
+                          widget.allowRowHighlight,
+                          widget.rowHighlightColor),
                     )
                     .toList(),
               )
@@ -129,12 +137,15 @@ class _JsonTableState extends State<JsonTable> {
                     .where((header) => filterHeaderList.contains(header))
                     .map(
                       (header) => TableColumn(
-                        header,
-                        widget.dataList,
-                        widget.tableHeaderBuilder,
-                        widget.tableCellBuilder,
-                        null,
-                      ),
+                          header,
+                          widget.dataList,
+                          widget.tableHeaderBuilder,
+                          widget.tableCellBuilder,
+                          null,
+                          onRowTap,
+                          highlightedRowIndex,
+                          widget.allowRowHighlight,
+                          widget.rowHighlightColor),
                     )
                     .toList(),
               )
@@ -160,6 +171,15 @@ class _JsonTableState extends State<JsonTable> {
     this.headerList = headerList;
     this.filterHeaderList.addAll(headerList);
   }
+
+  onRowTap(int index) {
+    setState(() {
+      if (highlightedRowIndex == index)
+        highlightedRowIndex = null;
+      else
+        highlightedRowIndex = index;
+    });
+  }
 }
 
 class TableColumn extends StatelessWidget {
@@ -169,6 +189,10 @@ class TableColumn extends StatelessWidget {
   final TableCellBuilder tableCellBuilder;
   final JsonTableColumn column;
   final jsonUtils = JSONUtils();
+  final Function(int index) onRowTap;
+  final int highlightedRowIndex;
+  final bool allowRowHighlight;
+  final Color rowHighlightColor;
 
   TableColumn(
     this.header,
@@ -176,6 +200,10 @@ class TableColumn extends StatelessWidget {
     this.tableHeaderBuilder,
     this.tableCellBuilder,
     this.column,
+    this.onRowTap,
+    this.highlightedRowIndex,
+    this.allowRowHighlight,
+    this.rowHighlightColor,
   );
 
   @override
@@ -208,38 +236,52 @@ class TableColumn extends StatelessWidget {
                   .map((rowMap) => Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: <Widget>[
-                          tableCellBuilder != null
-                              ? tableCellBuilder(
-                                  getFormattedValue(
-                                    jsonUtils.get(
-                                      rowMap,
-                                      column?.field ?? header,
-                                      column?.defaultValue ?? '',
-                                    ),
-                                  ),
-                                )
-                              : Container(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 4.0, vertical: 2.0),
-                                  decoration: BoxDecoration(
-                                      border: Border.all(
-                                    width: 0.5,
-                                    color: Colors.grey.withOpacity(0.5),
-                                  )),
-                                  child: Text(
-                                    getFormattedValue(
-                                      jsonUtils.get(
-                                        rowMap,
-                                        column?.field ?? header,
-                                        column?.defaultValue ?? '',
+                          GestureDetector(
+                            onTap: () {
+                              onRowTap(dataList.indexOf(rowMap));
+                            },
+                            child: Container(
+                              color: (allowRowHighlight &&
+                                      highlightedRowIndex != null &&
+                                      highlightedRowIndex ==
+                                          dataList.indexOf(rowMap))
+                                  ? rowHighlightColor ??
+                                      Colors.yellowAccent.withOpacity(0.7)
+                                  : null,
+                              child: tableCellBuilder != null
+                                  ? tableCellBuilder(
+                                      getFormattedValue(
+                                        jsonUtils.get(
+                                          rowMap,
+                                          column?.field ?? header,
+                                          column?.defaultValue ?? '',
+                                        ),
+                                      ),
+                                    )
+                                  : Container(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 4.0, vertical: 2.0),
+                                      decoration: BoxDecoration(
+                                          border: Border.all(
+                                        width: 0.5,
+                                        color: Colors.grey.withOpacity(0.5),
+                                      )),
+                                      child: Text(
+                                        getFormattedValue(
+                                          jsonUtils.get(
+                                            rowMap,
+                                            column?.field ?? header,
+                                            column?.defaultValue ?? '',
+                                          ),
+                                        ),
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: 14.0,
+                                        ),
                                       ),
                                     ),
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontSize: 14.0,
-                                    ),
-                                  ),
-                                ),
+                            ),
+                          ),
                         ],
                       ))
                   .toList(),
