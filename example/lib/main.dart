@@ -1,8 +1,8 @@
-import 'package:example/pages/custom_column_table.dart';
-import 'package:example/pages/simple_table.dart';
 import 'package:flutter/material.dart';
 
 import 'pages/custom_column_nested_table.dart';
+import 'pages/custom_column_table.dart';
+import 'pages/simple_table.dart';
 
 void main() => runApp(MyApp());
 

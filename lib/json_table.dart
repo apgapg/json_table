@@ -58,41 +58,54 @@ class _JsonTableState extends State<JsonTable> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            if (widget.showColumnToggle)
+            if (widget.showColumnToggle && widget.columns == null)
               Container(
-                width: MediaQuery.of(context).size.width,
-                child: Wrap(
-                  runSpacing: -12,
-                  direction: Axis.horizontal,
+                width: MediaQuery.of(context).size.width - 32,
+                margin: EdgeInsets.only(bottom: 4),
+                child: ExpansionTile(
+                  leading: Icon(Icons.filter_list),
+                  title: Text(
+                    "ADD FILTERS (${filterHeaderList.length})",
+                    style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
                   children: <Widget>[
-                    if (widget.columns == null)
-                      for (String header in headerList)
-                        Material(
-                          color: Colors.transparent,
-                          child: InkWell(
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: <Widget>[
-                                Checkbox(
-                                  value: this.filterHeaderList.contains(header),
-                                  onChanged: null,
-                                ),
-                                Text(header),
-                                SizedBox(
-                                  width: 4.0,
-                                ),
-                              ],
+                    Wrap(
+                      runSpacing: -12,
+                      direction: Axis.horizontal,
+                      children: <Widget>[
+                        for (String header in headerList)
+                          Material(
+                            color: Colors.transparent,
+                            child: InkWell(
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: <Widget>[
+                                  Checkbox(
+                                    value:
+                                        this.filterHeaderList.contains(header),
+                                    onChanged: null,
+                                  ),
+                                  Text(header),
+                                  SizedBox(
+                                    width: 4.0,
+                                  ),
+                                ],
+                              ),
+                              onTap: () {
+                                setState(() {
+                                  if (this.filterHeaderList.contains(header))
+                                    this.filterHeaderList.remove(header);
+                                  else
+                                    this.filterHeaderList.add(header);
+                                });
+                              },
                             ),
-                            onTap: () {
-                              setState(() {
-                                if (this.filterHeaderList.contains(header))
-                                  this.filterHeaderList.remove(header);
-                                else
-                                  this.filterHeaderList.add(header);
-                              });
-                            },
                           ),
-                        ),
+                      ],
+                    )
                   ],
                 ),
               ),
