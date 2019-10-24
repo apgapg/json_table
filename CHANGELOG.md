@@ -1,3 +1,7 @@
+## [1.2.0]
+- Wrap column filters in ExpansionTile
+- Add rowHighlight support
+
 ## [1.1.0]
 - Add nested data showing support
 
