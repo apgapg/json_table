@@ -178,6 +178,17 @@ child: JsonTable(json,columns: columns)
 Head over to example code: [custom_column_nested_table.dart](https://github.com/apgapg/json_table/blob/master/example/lib/pages/custom_column_nested_table.dart)
 
 ### Key Highlights
+
+Add row highlighting with custom color support
+
+<img src="https://raw.githubusercontent.com/apgapg/json_table/master/src/ss4.png"  height = "400" alt="JsonTable"> 
+
+```dart
+allowRowHighlight: true,
+rowHighlightColor: Colors.yellow[500].withOpacity(0.7),
+```
+
+### Key Highlights
 - The table constructed isn't the flutter's native DataTable.
 - The table is manually coded hence serves a great learning purpose on how to create simple tables manually in flutter
 - Supports vertical & horizontal scroll
@@ -190,7 +201,8 @@ Head over to example code: [custom_column_nested_table.dart](https://github.com/
 - [X] Add support for auto formatting of date
 - [X] Extracting column headers logic must be change. Not to depend on first object
 - [X] Nested data showing support
-
+- [X] Row highlight support
+- [X] Wrap filters in expansion tile
 - [ ] Pagination support etc. Its good if this table can be replaced with Flutter's native DataTable
 - [ ] Add option to change header row to vertical row on left
 
