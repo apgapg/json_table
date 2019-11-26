@@ -40,7 +40,11 @@ class _CustomColumnTableState extends State<CustomColumnTable> {
         padding: EdgeInsets.all(16.0),
         child: Column(
           children: <Widget>[
-            JsonTable(json, columns: columns, showColumnToggle: true),
+            JsonTable(
+              json,
+              columns: columns,
+              showColumnToggle: true,
+            ),
             SizedBox(
               height: 16.0,
             ),

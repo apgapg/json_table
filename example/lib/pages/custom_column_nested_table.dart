@@ -1,6 +1,7 @@
 import 'dart:convert';
-import 'package:intl/intl.dart';
+
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:json_table/json_table.dart';
 import 'package:json_table/json_table_column.dart';
 
@@ -24,9 +25,16 @@ class _CustomColumnNestedTableState extends State<CustomColumnNestedTable> {
     columns = [
       JsonTableColumn("name", label: "Name"),
       JsonTableColumn("age", label: "Age"),
-      JsonTableColumn("DOB", label: "Date of Birth", valueBuilder: formatDOB),
-      JsonTableColumn("age",
-          label: "Eligible to Vote", valueBuilder: eligibleToVote),
+      JsonTableColumn(
+        "DOB",
+        label: "Date of Birth",
+        valueBuilder: formatDOB,
+      ),
+      JsonTableColumn(
+        "age",
+        label: "Eligible to Vote",
+        valueBuilder: eligibleToVote,
+      ),
       JsonTableColumn("email.1", label: "E-mail", defaultValue: "NA"),
     ];
   }
@@ -39,7 +47,11 @@ class _CustomColumnNestedTableState extends State<CustomColumnNestedTable> {
         padding: EdgeInsets.all(16.0),
         child: Column(
           children: <Widget>[
-            JsonTable(json, columns: columns, showColumnToggle: true),
+            JsonTable(
+              json,
+              columns: columns,
+              showColumnToggle: true,
+            ),
             SizedBox(
               height: 16.0,
             ),
