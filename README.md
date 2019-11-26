@@ -3,7 +3,7 @@
 
 This Flutter package provides a Json Table Widget for directly showing table from a json(Map). Supports Column toggle also.
 
-<img src="https://raw.githubusercontent.com/apgapg/json_table/master/src/s1.gif"  height = "400" alt="JsonTable"> <img src="https://raw.githubusercontent.com/apgapg/json_table/master/src/s2.gif"  height = "400" alt="JsonTable"> <img src="https://raw.githubusercontent.com/apgapg/json_table/master/src/s3.gif"  height = "400" alt="JsonTable"> <img src="https://raw.githubusercontent.com/apgapg/json_table/master/src/ss1.png"  height = "400" alt="JsonTable"> <img src="https://raw.githubusercontent.com/apgapg/json_table/master/src/ss4.png"  height = "400" alt="JsonTable"> 
+<img src="https://raw.githubusercontent.com/apgapg/json_table/master/src/s1.gif"  height = "400" alt="JsonTable"> <img src="https://raw.githubusercontent.com/apgapg/json_table/master/src/s2.gif"  height = "400" alt="JsonTable"> <img src="https://raw.githubusercontent.com/apgapg/json_table/master/src/s3.gif"  height = "400" alt="JsonTable"> <img src="https://raw.githubusercontent.com/apgapg/json_table/master/src/ss1.png"  height = "400" alt="JsonTable"> <img src="https://raw.githubusercontent.com/apgapg/json_table/master/src/ss4.png"  height = "400" alt="JsonTable"> <img src="https://raw.githubusercontent.com/apgapg/json_table/master/src/ss6.png"  height = "400" alt="JsonTable">
 
 
 # 💻 Installation
@@ -189,12 +189,23 @@ allowRowHighlight: true,
 rowHighlightColor: Colors.yellow[500].withOpacity(0.7),
 ```
 
+## Pagination
+
+Just provide an int value to 'paginationRowCount' parameter
+
+<img src="https://raw.githubusercontent.com/apgapg/json_table/master/src/ss6.png"  height = "400" alt="JsonTable"> 
+
+```dart
+paginationRowCount: 4,
+```
+
 ### Key Highlights
 - The table constructed isn't the flutter's native DataTable.
 - The table is manually coded hence serves a great learning purpose on how to create simple tables manually in flutter
 - Supports vertical & horizontal scroll
 - Supports custom columns includes default value, column name, value builder
 - Supports nested data showing
+- Supports pagination
 
 ## TODO
 - [X] Custom header list parameter. This will help to show only those keys as mentioned in header list
@@ -204,7 +215,7 @@ rowHighlightColor: Colors.yellow[500].withOpacity(0.7),
 - [X] Nested data showing support
 - [X] Row highlight support
 - [X] Wrap filters in expansion tile
-- [ ] Pagination support etc. Its good if this table can be replaced with Flutter's native DataTable
+- [X] Pagination support
 - [ ] Add option to change header row to vertical row on left
 
 # ⭐ My Flutter Packages
