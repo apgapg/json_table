@@ -68,7 +68,7 @@ class _SimpleTableState extends State<SimpleTable> {
                     },
                     allowRowHighlight: true,
                     rowHighlightColor: Colors.yellow[500].withOpacity(0.7),
-                    paginationRowCount: 12,
+                    paginationRowCount: 4,
                   ),
                   SizedBox(
                     height: 40.0,
