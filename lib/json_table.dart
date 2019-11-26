@@ -275,6 +275,6 @@ class _JsonTableState extends State<JsonTable> {
   }
 
   bool _showPagination() {
-    return paginationRowCount != null;
+    return widget.paginationRowCount != null;
   }
 }
