@@ -55,7 +55,9 @@ class _JsonTableState extends State<JsonTable> {
     assert(widget.dataList != null && widget.dataList.isNotEmpty);
     data = widget.dataList.cast<Map>();
     pageIndex = 0;
-    paginationRowCount = math.min<int>(widget.paginationRowCount, data.length);
+    if (_showPagination())
+      paginationRowCount =
+          math.min<int>(widget.paginationRowCount, data.length);
     if (_showPagination()) pagesCount = data.length ~/ paginationRowCount;
     setHeaderList();
   }
