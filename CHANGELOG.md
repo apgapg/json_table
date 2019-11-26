@@ -1,3 +1,6 @@
+## [1.3.2]
+- Fix Pagination not working
+
 ## [1.3.1]
 - Fix NPE when paginationRowCount is not supplied
 
