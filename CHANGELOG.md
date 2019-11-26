@@ -1,3 +1,6 @@
+## [1.3.1]
+- Fix NPE when paginationRowCount is not supplied
+
 ## [1.3.0]
 - Add pagination support [#1](https://github.com/apgapg/json_table/issues/1)
 - Fix column toggle not working when custom column list is provided
