@@ -1,3 +1,7 @@
+## [1.3.0]
+- Add pagination support [#1](https://github.com/apgapg/json_table/issues/1)
+- Fix column toggle not working when custom column list is provided
+
 ## [1.2.0]
 - Wrap column filters in ExpansionTile
 - Add rowHighlight support
