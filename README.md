@@ -3,6 +3,8 @@
 
 This Flutter package provides a Json Table Widget for directly showing table from a json(Map). Supports Column toggle also.
 
+Live Demo: [https://apgapg.github.io/json_table/](https://apgapg.github.io/json_table/)
+
 <img src="https://raw.githubusercontent.com/apgapg/json_table/master/src/s1.gif"  height = "400" alt="JsonTable"> <img src="https://raw.githubusercontent.com/apgapg/json_table/master/src/s2.gif"  height = "400" alt="JsonTable"> <img src="https://raw.githubusercontent.com/apgapg/json_table/master/src/s3.gif"  height = "400" alt="JsonTable"> <img src="https://raw.githubusercontent.com/apgapg/json_table/master/src/ss1.png"  height = "400" alt="JsonTable"> <img src="https://raw.githubusercontent.com/apgapg/json_table/master/src/ss4.png"  height = "400" alt="JsonTable"> <img src="https://raw.githubusercontent.com/apgapg/json_table/master/src/ss6.png"  height = "400" alt="JsonTable">
 
 
