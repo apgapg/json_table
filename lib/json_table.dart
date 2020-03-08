@@ -75,154 +75,158 @@ class _JsonTableState extends State<JsonTable> {
   Widget build(BuildContext context) {
     return Screenshot(
       controller: widget.screenshotController,
-      child: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            if (widget.showColumnToggle)
-              Container(
-                margin: EdgeInsets.only(bottom: 4),
-                child: ExpansionTile(
-                  leading: Icon(Icons.filter_list),
-                  title: Text(
-                    "ADD FILTERS (${filterHeaderList.length})",
-                    style: TextStyle(
-                      fontSize: 13,
-                      fontWeight: FontWeight.w500,
+      child: Container(
+        color: Theme.of(context).cardColor,
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              if (widget.showColumnToggle)
+                Container(
+                  margin: EdgeInsets.only(bottom: 4),
+                  child: ExpansionTile(
+                    leading: Icon(Icons.filter_list),
+                    title: Text(
+                      "ADD FILTERS (${filterHeaderList.length})",
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
-                  ),
-                  children: <Widget>[
-                    Wrap(
-                      runSpacing: -12,
-                      direction: Axis.horizontal,
-                      children: <Widget>[
-                        for (String header in headerList)
-                          Material(
-                            color: Colors.transparent,
-                            child: InkWell(
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: <Widget>[
-                                  Checkbox(
-                                    value:
-                                        this.filterHeaderList.contains(header),
-                                    onChanged: null,
-                                  ),
-                                  Text(header),
-                                  SizedBox(
-                                    width: 4.0,
-                                  ),
-                                ],
+                    children: <Widget>[
+                      Wrap(
+                        runSpacing: -12,
+                        direction: Axis.horizontal,
+                        children: <Widget>[
+                          for (String header in headerList)
+                            Material(
+                              color: Colors.transparent,
+                              child: InkWell(
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: <Widget>[
+                                    Checkbox(
+                                      value: this
+                                          .filterHeaderList
+                                          .contains(header),
+                                      onChanged: null,
+                                    ),
+                                    Text(header),
+                                    SizedBox(
+                                      width: 4.0,
+                                    ),
+                                  ],
+                                ),
+                                onTap: () {
+                                  setState(() {
+                                    if (this.filterHeaderList.contains(header))
+                                      this.filterHeaderList.remove(header);
+                                    else
+                                      this.filterHeaderList.add(header);
+                                  });
+                                },
                               ),
-                              onTap: () {
-                                setState(() {
-                                  if (this.filterHeaderList.contains(header))
-                                    this.filterHeaderList.remove(header);
-                                  else
-                                    this.filterHeaderList.add(header);
-                                });
-                              },
                             ),
-                          ),
-                      ],
-                    )
-                  ],
-                ),
-              ),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: (widget.columns != null)
-                  ? Row(
-                      children: widget.columns
-                          .where(
-                              (item) => filterHeaderList.contains(item.field))
-                          .map(
-                            (item) => TableColumn(
-                              item.label,
-                              _getPaginatedData(),
-                              widget.tableHeaderBuilder,
-                              widget.tableCellBuilder,
-                              item,
-                              onRowTap,
-                              highlightedRowIndex,
-                              widget.allowRowHighlight,
-                              widget.rowHighlightColor,
-                            ),
-                          )
-                          .toList(),
-                    )
-                  : Row(
-                      children: filterHeaderList
-                          .map(
-                            (header) => TableColumn(
-                              header,
-                              _getPaginatedData(),
-                              widget.tableHeaderBuilder,
-                              widget.tableCellBuilder,
-                              null,
-                              onRowTap,
-                              highlightedRowIndex,
-                              widget.allowRowHighlight,
-                              widget.rowHighlightColor,
-                            ),
-                          )
-                          .toList(),
-                    ),
-            ),
-            if (_showPagination())
-              Container(
-                height: 48,
-                margin: EdgeInsets.symmetric(vertical: 8),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Theme.of(context).dividerColor,
+                        ],
+                      )
+                    ],
                   ),
-                  borderRadius: BorderRadius.circular(8),
                 ),
-                child: Row(
-                  children: <Widget>[
-                    Material(
-                      type: MaterialType.circle,
-                      color: Colors.transparent,
-                      child: IconButton(
-                        icon: Icon(Icons.arrow_left),
-                        onPressed: _showLeftButton()
-                            ? () {
-                                setState(() {
-                                  pageIndex--;
-                                });
-                              }
-                            : null,
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: (widget.columns != null)
+                    ? Row(
+                        children: widget.columns
+                            .where(
+                                (item) => filterHeaderList.contains(item.field))
+                            .map(
+                              (item) => TableColumn(
+                                item.label,
+                                _getPaginatedData(),
+                                widget.tableHeaderBuilder,
+                                widget.tableCellBuilder,
+                                item,
+                                onRowTap,
+                                highlightedRowIndex,
+                                widget.allowRowHighlight,
+                                widget.rowHighlightColor,
+                              ),
+                            )
+                            .toList(),
+                      )
+                    : Row(
+                        children: filterHeaderList
+                            .map(
+                              (header) => TableColumn(
+                                header,
+                                _getPaginatedData(),
+                                widget.tableHeaderBuilder,
+                                widget.tableCellBuilder,
+                                null,
+                                onRowTap,
+                                highlightedRowIndex,
+                                widget.allowRowHighlight,
+                                widget.rowHighlightColor,
+                              ),
+                            )
+                            .toList(),
                       ),
-                    ),
-                    Flexible(
-                      flex: 1,
-                      fit: FlexFit.tight,
-                      child: Text(
-                        "Page ${pageIndex + 1} of $pagesCount",
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                    Material(
-                      type: MaterialType.circle,
-                      color: Colors.transparent,
-                      child: IconButton(
-                        icon: Icon(Icons.arrow_right),
-                        onPressed: showRightButton()
-                            ? () {
-                                setState(() {
-                                  pageIndex++;
-                                });
-                              }
-                            : null,
-                      ),
-                    ),
-                  ],
-                ),
               ),
-          ],
+              if (_showPagination())
+                Container(
+                  height: 48,
+                  margin: EdgeInsets.symmetric(vertical: 8),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Theme.of(context).dividerColor,
+                    ),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Row(
+                    children: <Widget>[
+                      Material(
+                        type: MaterialType.circle,
+                        color: Colors.transparent,
+                        child: IconButton(
+                          icon: Icon(Icons.arrow_left),
+                          onPressed: _showLeftButton()
+                              ? () {
+                                  setState(() {
+                                    pageIndex--;
+                                  });
+                                }
+                              : null,
+                        ),
+                      ),
+                      Flexible(
+                        flex: 1,
+                        fit: FlexFit.tight,
+                        child: Text(
+                          "Page ${pageIndex + 1} of $pagesCount",
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      Material(
+                        type: MaterialType.circle,
+                        color: Colors.transparent,
+                        child: IconButton(
+                          icon: Icon(Icons.arrow_right),
+                          onPressed: showRightButton()
+                              ? () {
+                                  setState(() {
+                                    pageIndex++;
+                                  });
+                                }
+                              : null,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+            ],
+          ),
         ),
       ),
     );
