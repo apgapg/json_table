@@ -255,7 +255,7 @@ class _JsonTableState extends State<JsonTable> {
   List _getPaginatedData() {
     if (paginationRowCount != null) {
       final startIndex =
-          pageIndex == 0 ? 0 : (pageIndex * paginationRowCount - 1);
+          pageIndex == 0 ? 0 : (pageIndex * paginationRowCount);
       final endIndex =
           math.min((startIndex + paginationRowCount), (data.length - 1));
       if (endIndex == data.length - 1)
