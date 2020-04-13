@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:example/pages/local_table.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -38,7 +39,7 @@ class RootPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 4,
       child: Scaffold(
         appBar: AppBar(
           title: Text("Table Widget"),
@@ -53,6 +54,9 @@ class RootPage extends StatelessWidget {
               Tab(
                 text: "Nested Data Table",
               ),
+              Tab(
+                text: "Local Data Table",
+              ),
             ],
           ),
         ),
@@ -61,6 +65,7 @@ class RootPage extends StatelessWidget {
             SimpleTable(),
             CustomColumnTable(),
             CustomColumnNestedTable(),
+            LocalTable(),
           ],
         ),
       ),
