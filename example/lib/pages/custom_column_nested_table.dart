@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:json_table/json_table.dart';
-import 'package:json_table/json_table_column.dart';
+import 'package:json_table/src/json_table_column.dart';
 
 class CustomColumnNestedTable extends StatefulWidget {
   @override
@@ -43,7 +43,7 @@ class _CustomColumnNestedTableState extends State<CustomColumnNestedTable> {
   Widget build(BuildContext context) {
     var json = jsonDecode(jsonSample);
     return Scaffold(
-      body: Container(
+      body: SingleChildScrollView(
         padding: EdgeInsets.all(16.0),
         child: Column(
           children: <Widget>[
