@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:json_table/src/pagination_box.dart';
 
 import 'json_table_column.dart';
 import 'table_column.dart';
@@ -163,55 +164,23 @@ class _JsonTableState extends State<JsonTable> {
                   ),
           ),
           if (_showPagination())
-            Container(
-              height: 48,
-              margin: EdgeInsets.symmetric(vertical: 8),
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Theme.of(context).dividerColor,
-                ),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Row(
-                children: <Widget>[
-                  Material(
-                    type: MaterialType.circle,
-                    color: Colors.transparent,
-                    child: IconButton(
-                      icon: Icon(Icons.arrow_left),
-                      onPressed: _showLeftButton()
-                          ? () {
-                              setState(() {
-                                pageIndex--;
-                              });
-                            }
-                          : null,
-                    ),
-                  ),
-                  Flexible(
-                    flex: 1,
-                    fit: FlexFit.tight,
-                    child: Text(
-                      "Page ${pageIndex + 1} of $pagesCount",
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  Material(
-                    type: MaterialType.circle,
-                    color: Colors.transparent,
-                    child: IconButton(
-                      icon: Icon(Icons.arrow_right),
-                      onPressed: showRightButton()
-                          ? () {
-                              setState(() {
-                                pageIndex++;
-                              });
-                            }
-                          : null,
-                    ),
-                  ),
-                ],
-              ),
+            PaginationBox(
+              pageIndex: pageIndex,
+              pagesCount: pagesCount,
+              onLeftButtonTap: _showLeftButton()
+                  ? () {
+                      setState(() {
+                        pageIndex--;
+                      });
+                    }
+                  : null,
+              onRightButtonTap: showRightButton()
+                  ? () {
+                      setState(() {
+                        pageIndex++;
+                      });
+                    }
+                  : null,
             ),
         ],
       ),
