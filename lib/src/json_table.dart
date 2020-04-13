@@ -8,6 +8,7 @@ import 'table_column.dart';
 
 typedef TableHeaderBuilder = Widget Function(String header);
 typedef TableCellBuilder = Widget Function(dynamic value);
+typedef OnRowSelect = void Function(int index, dynamic map);
 
 class JsonTable extends StatefulWidget {
   final List dataList;
@@ -18,6 +19,7 @@ class JsonTable extends StatefulWidget {
   final bool allowRowHighlight;
   final Color rowHighlightColor;
   final int paginationRowCount;
+  final OnRowSelect onRowSelect;
 
   JsonTable(
     this.dataList, {
@@ -29,6 +31,7 @@ class JsonTable extends StatefulWidget {
     this.allowRowHighlight = false,
     this.rowHighlightColor,
     this.paginationRowCount,
+    this.onRowSelect,
   }) : super(key: key);
 
   @override
@@ -210,13 +213,14 @@ class _JsonTableState extends State<JsonTable> {
     this.filterHeaderList.addAll(headerList);
   }
 
-  onRowTap(int index) {
+  onRowTap(int index, dynamic rowMap) {
     setState(() {
       if (highlightedRowIndex == index)
         highlightedRowIndex = null;
       else
         highlightedRowIndex = index;
     });
+    if (widget.onRowSelect != null) widget.onRowSelect(index, rowMap);
   }
 
   List _getPaginatedData() {

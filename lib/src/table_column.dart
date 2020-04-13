@@ -12,7 +12,7 @@ class TableColumn extends StatelessWidget {
   final TableCellBuilder tableCellBuilder;
   final JsonTableColumn column;
   final jsonUtils = JSONUtils();
-  final Function(int index) onRowTap;
+  final Function(int index, dynamic rowMap) onRowTap;
   final int highlightedRowIndex;
   final bool allowRowHighlight;
   final Color rowHighlightColor;
@@ -62,7 +62,7 @@ class TableColumn extends StatelessWidget {
                       children: <Widget>[
                         GestureDetector(
                           onTap: () {
-                            onRowTap(dataList.indexOf(rowMap));
+                            onRowTap(dataList.indexOf(rowMap), rowMap);
                           },
                           child: Container(
                             color: (allowRowHighlight &&
