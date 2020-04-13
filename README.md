@@ -5,6 +5,17 @@ This Flutter package provides a Json Table Widget for directly showing table fro
 
 Live Demo: [https://apgapg.github.io/json_table/](https://apgapg.github.io/json_table/)
 
+### Features
+- The table constructed isn't the flutter's native DataTable.
+- The table is manually coded hence serves a great learning purpose on how to create simple tables manually in flutter
+- Supports vertical & horizontal scroll
+- Supports custom columns includes default value, column name, value builder
+- Supports nested data showing
+- Supports pagination
+- Supports row select color, callback
+  
+  
+
 <img src="https://raw.githubusercontent.com/apgapg/json_table/master/src/s1.gif"  height = "400" alt="JsonTable"> <img src="https://raw.githubusercontent.com/apgapg/json_table/master/src/s2.gif"  height = "400" alt="JsonTable"> <img src="https://raw.githubusercontent.com/apgapg/json_table/master/src/s3.gif"  height = "400" alt="JsonTable"> <img src="https://raw.githubusercontent.com/apgapg/json_table/master/src/ss1.png"  height = "400" alt="JsonTable"> <img src="https://raw.githubusercontent.com/apgapg/json_table/master/src/ss4.png"  height = "400" alt="JsonTable"> <img src="https://raw.githubusercontent.com/apgapg/json_table/master/src/ss6.png"  height = "400" alt="JsonTable">
 
 
@@ -25,42 +36,6 @@ dependencies:
 ```dart
 import 'package:json_table/json_table.dart';
 ```
-
-### Add Json Table Widget
-- Accepts Map<dynamic> as input. Just decode your json array string and pass it in JsonTable. No casting to model required.
-- Option for creating column header builder. This basically returns a widget to show as table column header
-```dart
-tableHeaderBuilder: (String header) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-      decoration: BoxDecoration(border: Border.all(width: 0.5),color: Colors.grey[300]),
-      child: Text(
-        header,
-        textAlign: TextAlign.center,
-        style: Theme.of(context).textTheme.display1.copyWith(fontWeight: FontWeight.w700, fontSize: 14.0,color: Colors.black87),
-      ),
-    );
-  }
-```
-- Option for creating table cell builder
-```dart
-tableCellBuilder: (value) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 4.0, vertical: 2.0),
-      decoration: BoxDecoration(border: Border.all(width: 0.5, color: Colors.grey.withOpacity(0.5))),
-      child: Text(
-        value,
-        textAlign: TextAlign.center,
-        style: Theme.of(context).textTheme.display1.copyWith(fontSize: 14.0, color: Colors.grey[900]),
-      ),
-    );
-  }
-```
-- Option for toggling column(s) also. User can customise which columns are to be shown
-```dart
- showColumnToggle: true
-```
-<img src="https://raw.githubusercontent.com/apgapg/json_table/master/src/ss5.png"  height = "400" alt="JsonTable"> 
 
 ### - Vanilla Implementation
 ```dart
@@ -180,6 +155,16 @@ child: JsonTable(json,columns: columns)
 
 Head over to example code: [custom_column_nested_table.dart](https://github.com/apgapg/json_table/blob/master/example/lib/pages/custom_column_nested_table.dart)
 
+### Column toggle
+
+Option for toggling column(s) also. User can customise which columns are to be shown
+
+```dart
+ showColumnToggle: true
+```
+
+<img src="https://raw.githubusercontent.com/apgapg/json_table/master/src/ss5.png"  height = "400" alt="JsonTable"> 
+
 ### Row Highlighting
 
 Add row highlighting with custom color support
@@ -191,7 +176,19 @@ allowRowHighlight: true,
 rowHighlightColor: Colors.yellow[500].withOpacity(0.7),
 ```
 
-## Pagination
+### Row Select Callback
+
+Get the index and data map of a particular selected row. 
+Note index might return incorrect value in case of pagination
+
+```dart
+onRowSelect: (index, map) {
+    print(index);
+    print(map);
+  },
+```
+
+### Pagination
 
 Just provide an int value to 'paginationRowCount' parameter
 
@@ -201,14 +198,6 @@ Just provide an int value to 'paginationRowCount' parameter
 paginationRowCount: 4,
 ```
 
-### Key Highlights
-- The table constructed isn't the flutter's native DataTable.
-- The table is manually coded hence serves a great learning purpose on how to create simple tables manually in flutter
-- Supports vertical & horizontal scroll
-- Supports custom columns includes default value, column name, value builder
-- Supports nested data showing
-- Supports pagination
-
 ## TODO
 - [X] Custom header list parameter. This will help to show only those keys as mentioned in header list
 - [X] Add support for keys missing in json object
@@ -216,6 +205,7 @@ paginationRowCount: 4,
 - [X] Extracting column headers logic must be change. Not to depend on first object
 - [X] Nested data showing support
 - [X] Row highlight support
+- [X] Row select callback
 - [X] Wrap filters in expansion tile
 - [X] Pagination support
 - [ ] Add option to change header row to vertical row on left
