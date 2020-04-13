@@ -1,3 +1,10 @@
+## [1.4.0]
+- Fixed pagination leaving out elements
+- Fixed duplicate item issue
+- Restructure project
+- Add onRowSelect support
+- Add local json showing example
+
 ## [1.3.2]
 - Fix Pagination not working
 
