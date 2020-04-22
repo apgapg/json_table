@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:example/pages/custom_data_table.dart';
 import 'package:example/pages/local_table.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +31,12 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.purple,
       ),
       debugShowCheckedModeBanner: false,
-      home: RootPage(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => RootPage(),
+        // When navigating to the "/second" route, build the SecondScreen widget.
+        '/customData': (context) => CustomDataTable(),
+      },
     );
   }
 }
@@ -43,6 +49,19 @@ class RootPage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Text("Table Widget"),
+          actions: [
+            FlatButton(
+              child: Text(
+                "TEST LIVE",
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+              onPressed: () {
+                Navigator.of(context).pushNamed('/customData');
+              },
+            )
+          ],
           bottom: TabBar(
             tabs: <Widget>[
               Tab(
