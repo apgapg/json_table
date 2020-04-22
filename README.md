@@ -5,6 +5,8 @@ This Flutter package provides a Json Table Widget for directly showing table fro
 
 Live Demo: [https://apgapg.github.io/json_table/](https://apgapg.github.io/json_table/)
 
+Live Data Testing: [https://apgapg.github.io/json_table/](https://apgapg.github.io/json_table/#/customData/)
+
 ### Features
 - The table constructed isn't the flutter's native DataTable.
 - The table is manually coded hence serves a great learning purpose on how to create simple tables manually in flutter
