@@ -19,6 +19,7 @@ class JsonTable extends StatefulWidget {
   final bool allowRowHighlight;
   final Color rowHighlightColor;
   final int paginationRowCount;
+  final String filterTitle;
   final OnRowSelect onRowSelect;
 
   JsonTable(
@@ -29,6 +30,7 @@ class JsonTable extends StatefulWidget {
     this.columns,
     this.showColumnToggle = false,
     this.allowRowHighlight = false,
+    this.filterTitle = 'ADD FILTERS',
     this.rowHighlightColor,
     this.paginationRowCount,
     this.onRowSelect,
@@ -46,6 +48,7 @@ class _JsonTableState extends State<JsonTable> {
   int paginationRowCount;
   int pagesCount;
   List<Map> data;
+  Map<String, String> headerLabels = Map<String, String>();
 
   @override
   void initState() {
@@ -84,7 +87,7 @@ class _JsonTableState extends State<JsonTable> {
               child: ExpansionTile(
                 leading: Icon(Icons.filter_list),
                 title: Text(
-                  "ADD FILTERS (${filterHeaderList.length})",
+                  "${this.widget.filterTitle} (${filterHeaderList.length})",
                   style: TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.w500,
@@ -106,7 +109,7 @@ class _JsonTableState extends State<JsonTable> {
                                   value: this.filterHeaderList.contains(header),
                                   onChanged: null,
                                 ),
-                                Text(header),
+                                Text(this.headerLabels[header]),
                                 SizedBox(
                                   width: 4.0,
                                 ),
@@ -195,11 +198,13 @@ class _JsonTableState extends State<JsonTable> {
     if (widget.columns != null) {
       widget.columns.forEach((item) {
         headers.add(item.field);
+        this.headerLabels[item.field] = item.label == null ? item.field : item.label;
       });
     } else {
       widget.dataList.forEach((map) {
         map.keys.forEach((key) {
           headers.add(key);
+          this.headerLabels[key] = key;
         });
       });
     }
