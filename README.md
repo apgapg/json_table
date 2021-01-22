@@ -192,7 +192,7 @@ onRowSelect: (index, map) {
 
 ### Pagination
 
-Just provide an int value to 'paginationRowCount' parameter
+Just provide an int value to `paginationRowCount` parameter
 
 <img src="https://raw.githubusercontent.com/apgapg/json_table/master/src/ss6.png"  height = "400" alt="JsonTable"> 
 
