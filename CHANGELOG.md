@@ -1,3 +1,6 @@
+## [2.0.1]
+- Remove json_utilities dependency (#36)
+
 ## [2.0.0]
 - [Null Safety] Migrate project to support null safety
 - [Misc] Update Android and Linux project
