@@ -17,7 +17,7 @@ class _CustomColumnTableState extends State<CustomColumnTable> {
       '{"name":"John","email":"john@gmail.com","age":10,"DOB":"2000-02-24"},'
       '{"name":"Ram","age":12,"DOB":"2000-02-01"}]';
   bool toggle = true;
-  List<JsonTableColumn> columns;
+  List<JsonTableColumn>? columns;
 
   @override
   void initState() {

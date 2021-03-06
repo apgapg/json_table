@@ -6,25 +6,25 @@ import 'package:json_table/src/pagination_box.dart';
 import 'json_table_column.dart';
 import 'table_column.dart';
 
-typedef TableHeaderBuilder = Widget Function(String header);
+typedef TableHeaderBuilder = Widget Function(String? header);
 typedef TableCellBuilder = Widget Function(dynamic value);
 typedef OnRowSelect = void Function(int index, dynamic map);
 
 class JsonTable extends StatefulWidget {
   final List dataList;
-  final TableHeaderBuilder tableHeaderBuilder;
-  final TableCellBuilder tableCellBuilder;
-  final List<JsonTableColumn> columns;
+  final TableHeaderBuilder? tableHeaderBuilder;
+  final TableCellBuilder? tableCellBuilder;
+  final List<JsonTableColumn>? columns;
   final bool showColumnToggle;
   final bool allowRowHighlight;
-  final Color rowHighlightColor;
-  final int paginationRowCount;
+  final Color? rowHighlightColor;
+  final int? paginationRowCount;
   final String filterTitle;
-  final OnRowSelect onRowSelect;
+  final OnRowSelect? onRowSelect;
 
   JsonTable(
     this.dataList, {
-    Key key,
+    Key? key,
     this.tableHeaderBuilder,
     this.tableCellBuilder,
     this.columns,
@@ -41,14 +41,14 @@ class JsonTable extends StatefulWidget {
 }
 
 class _JsonTableState extends State<JsonTable> {
-  Set<String> headerList = new Set();
-  Set<String> filterHeaderList = new Set();
-  int highlightedRowIndex;
+  Set<String?> headerList = new Set();
+  Set<String?> filterHeaderList = new Set();
+  int? highlightedRowIndex;
   int pageIndex = 0;
-  int paginationRowCount;
-  int pagesCount;
-  List<Map> data;
-  Map<String, String> headerLabels = Map<String, String>();
+  int? paginationRowCount;
+  int? pagesCount;
+  List<Map>? data;
+  Map<String?, String?> headerLabels = Map<String?, String?>();
 
   @override
   void initState() {
@@ -62,9 +62,9 @@ class _JsonTableState extends State<JsonTable> {
     pageIndex = 0;
     if (_showPagination())
       paginationRowCount =
-          math.min<int>(widget.paginationRowCount, data.length);
+          math.min<int>(widget.paginationRowCount!, data!.length);
     if (_showPagination())
-      pagesCount = (data.length / paginationRowCount).ceil();
+      pagesCount = (data!.length / paginationRowCount!).ceil();
     setHeaderList();
   }
 
@@ -98,7 +98,7 @@ class _JsonTableState extends State<JsonTable> {
                     runSpacing: -12,
                     direction: Axis.horizontal,
                     children: <Widget>[
-                      for (String header in headerList)
+                      for (String? header in headerList)
                         Material(
                           color: Colors.transparent,
                           child: InkWell(
@@ -109,7 +109,7 @@ class _JsonTableState extends State<JsonTable> {
                                   value: this.filterHeaderList.contains(header),
                                   onChanged: null,
                                 ),
-                                Text(this.headerLabels[header]),
+                                Text(this.headerLabels[header]!),
                                 SizedBox(
                                   width: 4.0,
                                 ),
@@ -134,7 +134,7 @@ class _JsonTableState extends State<JsonTable> {
             scrollDirection: Axis.horizontal,
             child: (widget.columns != null)
                 ? Row(
-                    children: widget.columns
+                    children: widget.columns!
                         .where((item) => filterHeaderList.contains(item.field))
                         .map(
                           (item) => TableColumn(
@@ -193,12 +193,13 @@ class _JsonTableState extends State<JsonTable> {
     );
   }
 
-  Set<String> extractColumnHeaders() {
-    var headers = Set<String>();
+  Set<String?> extractColumnHeaders() {
+    var headers = Set<String?>();
     if (widget.columns != null) {
-      widget.columns.forEach((item) {
+      widget.columns!.forEach((item) {
         headers.add(item.field);
-        this.headerLabels[item.field] = item.label == null ? item.field : item.label;
+        this.headerLabels[item.field] =
+            item.label == null ? item.field : item.label;
       });
     } else {
       widget.dataList.forEach((map) {
@@ -225,18 +226,18 @@ class _JsonTableState extends State<JsonTable> {
       else
         highlightedRowIndex = index;
     });
-    if (widget.onRowSelect != null) widget.onRowSelect(index, rowMap);
+    if (widget.onRowSelect != null) widget.onRowSelect!(index, rowMap);
   }
 
-  List _getPaginatedData() {
+  List? _getPaginatedData() {
     if (paginationRowCount != null) {
-      final startIndex = pageIndex == 0 ? 0 : (pageIndex * paginationRowCount);
+      final startIndex = pageIndex == 0 ? 0 : (pageIndex * paginationRowCount!);
       final endIndex =
-          math.min((startIndex + paginationRowCount), (data.length - 1));
-      if (endIndex == data.length - 1)
-        return data.sublist(startIndex, endIndex + 1).toList(growable: false);
+          math.min((startIndex + paginationRowCount!), (data!.length - 1));
+      if (endIndex == data!.length - 1)
+        return data!.sublist(startIndex, endIndex + 1).toList(growable: false);
       else
-        return data.sublist(startIndex, endIndex).toList(growable: false);
+        return data!.sublist(startIndex, endIndex).toList(growable: false);
     } else
       return data;
   }
@@ -246,7 +247,7 @@ class _JsonTableState extends State<JsonTable> {
   }
 
   bool showRightButton() {
-    return pageIndex < pagesCount - 1;
+    return pageIndex < pagesCount! - 1;
   }
 
   bool _showPagination() {

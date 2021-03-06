@@ -10,7 +10,7 @@ class LocalTable extends StatefulWidget {
 }
 
 class _LocalTableState extends State<LocalTable> {
-  List jsonSample;
+  List? jsonSample;
 
   @override
   void initState() {
@@ -31,10 +31,10 @@ class _LocalTableState extends State<LocalTable> {
               : Column(
                   children: [
                     JsonTable(
-                      jsonSample,
+                      jsonSample!,
                       showColumnToggle: true,
                       allowRowHighlight: true,
-                      rowHighlightColor: Colors.yellow[500].withOpacity(0.7),
+                      rowHighlightColor: Colors.yellow[500]!.withOpacity(0.7),
                       paginationRowCount: 20,
                       onRowSelect: (index, map) {
                         print(index);
@@ -64,7 +64,7 @@ class _LocalTableState extends State<LocalTable> {
       final jsonString = await rootBundle.loadString('assets/countries.json');
       if (mounted)
         setState(() {
-          jsonSample = jsonDecode(jsonString) as List;
+          jsonSample = jsonDecode(jsonString) as List?;
         });
     } catch (e) {
       print(e);

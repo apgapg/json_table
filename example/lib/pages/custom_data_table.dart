@@ -104,7 +104,7 @@ class _CustomDataTableState extends State<CustomDataTable> {
             SizedBox(
               width: 16,
             ),
-            StreamBuilder<List>(
+            StreamBuilder<List?>(
                 stream: _getStream(),
                 builder: (context, snapshot) {
                   return Expanded(
@@ -115,11 +115,11 @@ class _CustomDataTableState extends State<CustomDataTable> {
                             child: SingleChildScrollView(
                               padding: EdgeInsets.all(16.0),
                               child: JsonTable(
-                                snapshot.data,
+                                snapshot.data!,
                                 showColumnToggle: true,
                                 allowRowHighlight: true,
                                 rowHighlightColor:
-                                    Colors.yellow[500].withOpacity(0.7),
+                                    Colors.yellow[500]!.withOpacity(0.7),
                                 paginationRowCount: 20,
                                 onRowSelect: (index, map) {
                                   print(index);
@@ -150,9 +150,9 @@ class _CustomDataTableState extends State<CustomDataTable> {
     return jsonString;
   }
 
-  Stream<List> _getStream() {
-    return _subject.transform(new StreamTransformer<String, List>.fromHandlers(
-        handleData: (String value, EventSink<List> sink) {
+  Stream<List?> _getStream() {
+    return _subject.transform(new StreamTransformer<String, List?>.fromHandlers(
+        handleData: (String value, EventSink<List?> sink) {
       sink.add(jsonDecode(value));
     })).asBroadcastStream();
   }

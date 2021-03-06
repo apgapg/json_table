@@ -17,7 +17,7 @@ class _CustomColumnNestedTableState extends State<CustomColumnNestedTable> {
       '{"name":"Shyam","email":{"1":"shyam23@gmail.com"},"age":18,"DOB":"1995-07-01"},'
       '{"name":"John","email":{"1":"john@gmail.com"},"age":10,"DOB":"2000-02-24"}]';
   bool toggle = true;
-  List<JsonTableColumn> columns;
+  List<JsonTableColumn>? columns;
 
   @override
   void initState() {

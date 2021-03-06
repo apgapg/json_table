@@ -35,7 +35,7 @@ class _SimpleTableState extends State<SimpleTable> {
                       json,
                       showColumnToggle: true,
                       allowRowHighlight: true,
-                      rowHighlightColor: Colors.yellow[500].withOpacity(0.7),
+                      rowHighlightColor: Colors.yellow[500]!.withOpacity(0.7),
                       paginationRowCount: 4,
                       onRowSelect: (index, map) {
                         print(index);

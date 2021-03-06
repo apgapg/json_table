@@ -6,16 +6,16 @@ import 'json_table.dart';
 import 'json_table_column.dart';
 
 class TableColumn extends StatelessWidget {
-  final String header;
-  final List dataList;
-  final TableHeaderBuilder tableHeaderBuilder;
-  final TableCellBuilder tableCellBuilder;
-  final JsonTableColumn column;
+  final String? header;
+  final List? dataList;
+  final TableHeaderBuilder? tableHeaderBuilder;
+  final TableCellBuilder? tableCellBuilder;
+  final JsonTableColumn? column;
   final jsonUtils = JSONUtils();
   final Function(int index, dynamic rowMap) onRowTap;
-  final int highlightedRowIndex;
+  final int? highlightedRowIndex;
   final bool allowRowHighlight;
-  final Color rowHighlightColor;
+  final Color? rowHighlightColor;
 
   TableColumn(
     this.header,
@@ -36,7 +36,7 @@ class TableColumn extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           tableHeaderBuilder != null
-              ? tableHeaderBuilder(header)
+              ? tableHeaderBuilder!(header)
               : Container(
                   padding: EdgeInsets.symmetric(horizontal: 4.0, vertical: 2.0),
                   decoration: BoxDecoration(
@@ -44,7 +44,7 @@ class TableColumn extends StatelessWidget {
                     color: Colors.grey[300],
                   ),
                   child: Text(
-                    header,
+                    header!,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
@@ -55,29 +55,29 @@ class TableColumn extends StatelessWidget {
                 ),
           Container(
             child: Column(
-              children: dataList
+              children: dataList!
                   .map(
                     (rowMap) => Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: <Widget>[
                         GestureDetector(
                           onTap: () {
-                            onRowTap(dataList.indexOf(rowMap), rowMap);
+                            onRowTap(dataList!.indexOf(rowMap), rowMap);
                           },
                           child: Container(
                             color: (allowRowHighlight &&
                                     highlightedRowIndex != null &&
                                     highlightedRowIndex ==
-                                        dataList.indexOf(rowMap))
+                                        dataList!.indexOf(rowMap))
                                 ? rowHighlightColor ??
                                     Colors.yellowAccent.withOpacity(0.7)
                                 : null,
                             child: tableCellBuilder != null
-                                ? tableCellBuilder(
+                                ? tableCellBuilder!(
                                     getFormattedValue(
                                       jsonUtils.get(
                                         rowMap,
-                                        column?.field ?? header,
+                                        column?.field ?? header!,
                                         column?.defaultValue ?? '',
                                       ),
                                     ),
@@ -94,7 +94,7 @@ class TableColumn extends StatelessWidget {
                                       getFormattedValue(
                                         jsonUtils.get(
                                           rowMap,
-                                          column?.field ?? header,
+                                          column?.field ?? header!,
                                           column?.defaultValue ?? '',
                                         ),
                                       ),
@@ -120,7 +120,7 @@ class TableColumn extends StatelessWidget {
   String getFormattedValue(dynamic value) {
     if (value == null) return column?.defaultValue ?? '';
     if (column?.valueBuilder != null) {
-      return column.valueBuilder(value);
+      return column!.valueBuilder!(value);
     }
     return value.toString();
   }

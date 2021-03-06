@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 
 class PaginationBox extends StatelessWidget {
   final int pageIndex;
-  final int pagesCount;
-  final VoidCallback onLeftButtonTap;
-  final VoidCallback onRightButtonTap;
+  final int? pagesCount;
+  final VoidCallback? onLeftButtonTap;
+  final VoidCallback? onRightButtonTap;
 
   PaginationBox({
-    @required this.pageIndex,
-    @required this.pagesCount,
-    @required this.onLeftButtonTap,
-    @required this.onRightButtonTap,
+    required this.pageIndex,
+    required this.pagesCount,
+    required this.onLeftButtonTap,
+    required this.onRightButtonTap,
   });
 
   @override
