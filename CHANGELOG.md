@@ -1,3 +1,7 @@
+## [2.0.0]
+- [Null Safety] Migrate project to support null safety
+- [Misc] Update Android and Linux project
+
 ## [1.4.0]
 - Fixed pagination leaving out elements
 - Fixed duplicate item issue
