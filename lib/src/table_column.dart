@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:json_utilities/json_utilities.dart';
 
 import '../json_table.dart';
+import 'json_utilities.dart';
 import 'json_table.dart';
 import 'json_table_column.dart';
 
