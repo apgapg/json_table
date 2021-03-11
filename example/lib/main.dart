@@ -50,7 +50,7 @@ class RootPage extends StatelessWidget {
         appBar: AppBar(
           title: Text("Table Widget"),
           actions: [
-            FlatButton(
+            TextButton(
               child: Text(
                 "TEST LIVE",
                 style: TextStyle(

@@ -9,9 +9,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  json_utilities: ^0.1.3
-  intl: ^0.16.0
-  screenshot: ^0.1.1
+  intl: ^0.17.0
+  screenshot: ^1.0.0-nullsafety.1
 
 dev_dependencies:
   flutter_test:

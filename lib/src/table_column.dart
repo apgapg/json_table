@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:json_utilities/json_utilities.dart';
 
 import '../json_table.dart';
-import 'json_utilities.dart';
 import 'json_table.dart';
 import 'json_table_column.dart';
+import 'json_utilities.dart';
 
 class TableColumn extends StatelessWidget {
   final String? header;
@@ -121,15 +120,15 @@ class TableColumn extends StatelessWidget {
     );
   }
 
-  String getFormattedValue(dynamic value, JsonTableColumn column) {
-    if (column != null && column.type != null && column.type.isNotEmpty) {
+  String getFormattedValue(dynamic value, JsonTableColumn? column) {
+    if (column != null && column.type != null && column.type!.isNotEmpty) {
       try {
         if (column.type == 'date') {
-          return DateFormat("dd MMMM yy").format(DateTime.parse(value));
+          return DateFormat("dd MMM yy").format(DateTime.parse(value));
         } else if (column.type == 'time') {
           return DateFormat("hh:mm a").format(DateTime.parse(value));
         } else if (column.type == 'dateTime') {
-          return DateFormat("dd MMMM yy hh:mm a").format(DateTime.parse(value));
+          return DateFormat("dd MMM yy hh:mm a").format(DateTime.parse(value));
         } else {
           return value.toString();
         }
