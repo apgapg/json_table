@@ -16,4 +16,11 @@ class JsonTableColumn {
     label = json['label'];
     defaultValue = json['defaultValue'];
   }
+
+ JsonTableColumn.fromJson(this.field) {
+   final amountSpent = field.fold(0, (acc, cur) => acc + cur.availableBudget);
+    setState(() {
+      total += amountSpent;
+    });
+ }
 }
