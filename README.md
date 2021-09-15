@@ -1,5 +1,18 @@
 # Json Table Widget [![GitHub stars](https://img.shields.io/github/stars/apgapg/json_table.svg?style=social)](https://github.com/apgapg/json_table) [![Twitter Follow](https://img.shields.io/twitter/url/https/@ayushpgupta.svg?style=social)](https://twitter.com/ayushpgupta) ![GitHub last commit](https://img.shields.io/github/last-commit/apgapg/json_table.svg) [![Website shields.io](https://img.shields.io/website-up-down-green-red/http/shields.io.svg)](https://play.google.com/store/apps/details?id=com.coddu.flutterprofile)[![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/apgapg/json_table)
 
+## 💙 Proudly Sponsored by [FieldAssist](https://github.com/FieldAssist)
+
+<p align="center">
+<table>    
+    <tbody>
+        <tr>
+            <td align="center">
+                <a href="https://www.fieldassist.in/" target="_blank"><img width="250px" src="https://www.fieldassist.in/wp-content/uploads/2016/11/Copy-of-Untitled-1.png"/></a><br/><span><a href="https://www.fieldassist.in/request-demo" target="_blank">Request a Demo</a></span>
+            </td>            
+        </tr>
+    </tbody>
+</table>
+</p>
 
 This Flutter package provides a Json Table Widget for directly showing table from a json(Map). Supports Column toggle also.
 
